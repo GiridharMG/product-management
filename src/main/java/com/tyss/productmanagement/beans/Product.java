@@ -24,4 +24,6 @@ public class Product {
 	private String details;
 	@Column
 	private int quantity;
+	@Column
+	private double price;
 }

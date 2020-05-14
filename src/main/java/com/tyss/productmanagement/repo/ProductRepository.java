@@ -13,7 +13,7 @@ import com.tyss.productmanagement.beans.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	@Modifying
 	@Query("update Product set quantity=:quantity, details=:details, imageUrl=:imageUrl where id=:id")
-	public Product update(@Param("quantity")int quantity, @Param("details")String details, @Param("imageUrl")String imagUrl, @Param("id")int id);	
+	public int update(@Param("quantity")int quantity, @Param("details")String details, @Param("imageUrl")String imagUrl, @Param("id")int id);	
 	
 	public Product findByName(String name);
 }

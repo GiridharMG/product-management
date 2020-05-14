@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.tyss.productmanagement.beans.Product;
 import com.tyss.productmanagement.beans.ProductResponce;
 import com.tyss.productmanagement.repo.ProductRepository;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 public class ProductController {
 	private static final String SUCCESS = "Success";
@@ -61,8 +63,8 @@ public class ProductController {
 	@PutMapping(path = "/update", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ProductResponce modifyProduct(@RequestBody Product product) {
 		ProductResponce responce = new ProductResponce();
-		product = repo.update(product.getQuantity(), product.getDetails(), product.getImageUrl(), product.getId());
-		if (product != null) {
+		int i = repo.update(product.getQuantity(), product.getDetails(), product.getImageUrl(), product.getId());
+		if (i > 0) {
 			responce.setStatusCode(201);
 			responce.setMessage(SUCCESS);
 			responce.setDescription("Data updated in DB");
